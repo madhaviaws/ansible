@@ -1,0 +1,22 @@
+- name: demo on variables 
+  hosts: all  # all is default group in inventory file which includes everything 
+  vars:       # Global varibale
+      URL: play.google.com 
+  vars_files:
+      - dev-vars.yml 
+  tasks: 
+    - name: pritning URL  
+      ansible.builtin.debug:
+        msg: Url that we print is {{ URL }}  
+
+    - name: pritning URL with quotes  
+      ansible.builtin.debug:
+        msg: "{{ URL }}" 
+      vars:                 # local variable 
+        URL: task.google.com 
+    
+    - name: URL for this env is 
+      ansible.builtin.debug:
+        msg: "{{ ENV }}" 
+
+# CLI Variable > local variable >  files_variables>  global variable 

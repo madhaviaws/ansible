@@ -1,0 +1,25 @@
+- name: demo on conditions 
+  hosts: all  
+  vars:
+    # epic: true 
+    # actor: true 
+  tasks: 
+    - name: Run this when the OS is CentOS 
+      ansible.builtin.debug: 
+          msg: Hello to centos  
+      when: ansible_distribution == "CentOS"
+
+    - name: Run this when the OS is Ubuntu 
+      ansible.builtin.debug: 
+          msg: Hello to ubuntu  
+      when: ansible_distribution == "Ubuntu"
+
+    # - name: Only executes when the epic is true 
+    #   ansible.builtin.debug: 
+    #       msg: In this infite world we are just start dust 
+    #   when: epic
+
+    - name: Run this when actor variable is declared 
+      ansible.builtin.debug: 
+          msg: Actor is declared  
+      when: actor is defined

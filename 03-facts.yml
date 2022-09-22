@@ -1,0 +1,10 @@
+- name: demo on facts
+  hosts: all  
+  tasks: 
+    - name: pritning URL  
+      ansible.builtin.debug:
+        msg: OS Distro is {{ansible_distribution}} 
+
+    - name: pritning Mac Address   
+      ansible.builtin.debug:
+        msg: Mac Address is  {{ansible_default_ipv4.macaddress}}
