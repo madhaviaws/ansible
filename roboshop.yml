@@ -1,0 +1,5 @@
+- name: Roboshop project setup 
+  hosts: "{{COMPONENT}}"
+  become: yes  # Privileges escalation 
+  roles:
+    - "{{COMPONENT}}"
