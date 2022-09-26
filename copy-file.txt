@@ -1,1 +1,9 @@
 copy file test
+ ansible-vault encrypt_string abc123
+ enter vault password abc123
+ confirm vault password abc123
+
+ [ centos@base-instance ~/ansible ]$ ansible-playbook 12-secret.yml  --ask-vault-password
+/usr/local/lib/python3.6/site-packages/ansible/parsing/vault/__init__.py:44: CryptographyDeprecationWarning: Python 3.6 is no longer supported by the Python core team. Therefore, support for it is deprecated in cryptography and will be removed in a future release.
+  from cryptography.exceptions import InvalidSignature
+Vault password:

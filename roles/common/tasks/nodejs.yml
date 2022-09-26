@@ -39,3 +39,8 @@
   ansible.builtin.include_role:
     name: common 
     tasks_from: systemd-start-svc
+
+- name: Configuing system name 
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: set-hostname

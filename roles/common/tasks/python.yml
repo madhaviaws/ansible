@@ -1,0 +1,44 @@
+- name: Installing Python3
+  ansible.builtin.yum: 
+    name: 
+      - python36
+      - gcc
+      - python3-devel
+    state: installed 
+
+- name: Creating application user
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: create-user
+
+- name:  Download and extract {{COMPONENT}}
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: download-and-extract 
+
+- name: Installing {{COMPONNET}} Dependencies 
+  ansible.builtin.pip: 
+     requirements: /home/{{APPUSER}}/{{COMPONENT}}/requirements.txt
+     executable: pip3
+
+- name: Updating GID in {{COMPONENET}} file 
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini 
+    regexp: '^gid'
+    line: gid = {{APPUSER_REGISTER.group}}
+
+- name: Updating UID in {{COMPONENET}} file 
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini 
+    regexp: '^uid'
+    line: uid = {{APPUSER_REGISTER.uid}}
+
+- name: Configuing the {{COMPONENT}} svc
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: systemd-start-svc
+
+- name: Configuing system name 
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: set-hostname

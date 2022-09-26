@@ -1,11 +1,21 @@
 - name: Coping systemd file 
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service 
 
-- name: Starting {{COMPONENT}} Service 
-  ansible.builtin.systemd:
-    name: "{{COMPONENT}}" 
-    state: restarted
-    enabled: yes
-    daemon_reload: yes
+#- name: Coping systemd file 
+#  ansible.builtin.copy:
+#    src: systemd.service
+#    dest: /etc/systemd/system/{{COMPONENT}}.service 
+
+- name: Configuing the {{COMPONENT}} svc
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: start-svc
+
+#- name: Starting {{COMPONENT}} Service 
+#  ansible.builtin.systemd:
+#    name: "{{COMPONENT}}" 
+#    state: restarted
+#    enabled: yes
+#    daemon_reload: yes
