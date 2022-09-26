@@ -1,0 +1,41 @@
+- name: Configure the Yum Repos 
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash  
+
+- name: Install NodeJS 
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present  
+  loop: 
+    - nodejs 
+    - gcc-c++ 
+
+- name: Creating application user
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: create-user
+
+- name:  Download and extract {{COMPONENT}}
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: download-and-extract 
+
+- name: Install NodeJS packages based on package.json file 
+  community.general.npm:
+    path: /home/{{APPUSER}}/{{COMPONENT}}/  
+
+# - name: Coping systemd file 
+#   ansible.builtin.copy:
+#     src: systemd.service
+#     dest: /etc/systemd/system/{{COMPONENT}}.service 
+
+# - name: Starting {{COMPONENT}} Service 
+#   ansible.builtin.systemd:
+#     name: "{{COMPONENT}}" 
+#     state: restarted
+#     enabled: yes
+#     daemon_reload: yes
+
+- name: Configuing the {{COMPONENT}} svc
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: systemd-start-svc
