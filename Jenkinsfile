@@ -7,12 +7,8 @@ pipeline {
 
     stages {
         stage('Perform Lint Checks') {    // Runs only when it's a feature branch 
-<<<<<<< HEAD
-                   steps {
-=======
         when { branch pattern: "feature-.*", comparator: "REGEXP"} 
             steps {
->>>>>>> 1325c52eb6e040f718b356a16b560a9a4384824e
                 sh "env"
                 sh "echo Performing Link Checks"           
             }
@@ -26,21 +22,12 @@ pipeline {
             }
         }
 
-<<<<<<< HEAD
-        stage('Main') {   
-            when { 
-                branch 'main' }        // Checking whether the value of TAG_NAME is null or not
-                    
-            steps {
-                sh "echo I am a main branch"                
-=======
         stage('TAG') {   
             when { 
                 branch 'main'        // Checking whether the value of TAG_NAME is null or not
                 }    
             steps {
                 sh "echo I am running against a TAG"                
->>>>>>> 1325c52eb6e040f718b356a16b560a9a4384824e
             }
         }
     }
