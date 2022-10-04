@@ -24,7 +24,7 @@ pipeline {
 
         stage('TAG') {   
             when { 
-                expression { env.TAG_NAME != null }        //Checking whether the value of TAG_NAME is null or not
+                branch 'main'        //Checking whether the value of TAG_NAME is null or not
                 }    
             steps {
 			    sh "env"
