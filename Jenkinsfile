@@ -24,9 +24,10 @@ pipeline {
 
         stage('TAG') {   
             when { 
-                branch 'main'        // Checking whether the value of TAG_NAME is null or not
+                branch 'main'        //Checking whether the value of TAG_NAME is null or not
                 }    
             steps {
+			    sh "env"
                 sh "echo I am running against a TAG"                
             }
         }
