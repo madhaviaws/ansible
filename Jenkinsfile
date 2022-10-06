@@ -21,17 +21,12 @@ pipeline {
                 sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ENV=dev -e ansible_user=${SSH_CRED_USR} -e ansible_password=${SSH_CRED_PSW}"           
             }
         }
-        stage('ENV values') {   
-                       steps {
-			    sh "env"
-                              
-            }
-        }
-
+       
         stage('TAG') {   
             when { 
                 //branch 'main'        //Checking whether the value of TAG_NAME is null or not
-                expression { TAG_NAME ==~ ".*" } 
+                //expression { TAG_NAME ==~ ".*" } 
+                expression { env.TAG_NAME != null } 
                 }    
             steps {
 			    sh "env"
