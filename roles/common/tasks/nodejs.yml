@@ -19,9 +19,9 @@
     name: common 
     tasks_from: download-and-extract 
 
-- name: Install NodeJS packages based on package.json file 
-  community.general.npm:
-    path: /home/{{APPUSER}}/{{COMPONENT}}/  
+#- name: Install NodeJS packages based on package.json file 
+#  community.general.npm:
+#    path: /home/{{APPUSER}}/{{COMPONENT}}/  
 
 # - name: Coping systemd file 
 #   ansible.builtin.copy:
