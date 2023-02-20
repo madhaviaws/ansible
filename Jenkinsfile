@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         stage('Perform Lint Checks') {    // Runs only when it's a feature branch 
-        when { branch pattern: "feature-.*", comparator: "REGEXP"} 
+        when { branch pattern: "feature.*", comparator: "REGEXP"} 
             steps {
                 sh "env"
                 sh "echo Performing Link Checks"           
@@ -18,13 +18,13 @@ pipeline {
             when { branch pattern: "PR-.*", comparator: "REGEXP"}           // Runs only when it's a PR 
             steps {
                 sh "env"
-                sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ENV=dev -e ansible_user=${SSH_CRED_USR} -e ansible_password=${SSH_CRED_PSW}"           
+               // sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ENV=dev -e ansible_user=${SSH_CRED_USR} -e ansible_password=${SSH_CRED_PSW}"           
             }
         }
        
         stage('TAG') {   
             when { 
-                //branch 'main'        //Checking whether the value of TAG_NAME is null or not
+                //branch 'main'        //Checking whether the value of TAG_NAME is null or not//
                 //expression { TAG_NAME ==~ ".*" } 
                 expression { env.TAG_NAME != null } 
                 }    
