@@ -36,7 +36,7 @@
 # Downloads the package from NEXUS
 - name: Download and extract {{COMPONENT}}
   ansible.builtin.unarchive:
-    src: http://172.31.8.205:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    src: http://172.31.0.74:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
     dest: "{{APP_LOCATION}}"
     remote_src: yes 
   become_user: "{{APPUSER}}"
