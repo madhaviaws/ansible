@@ -5,7 +5,10 @@
   ansible.builtin.package:
     name: "{{item}}"
     state: present  
-  loop: 
+  loop:
+    - libc.so.6
+    - libstdc++.so.6
+    - libm.so.6
     - nodejs 
     - gcc-c++ 
 
